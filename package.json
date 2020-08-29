@@ -4,7 +4,9 @@
   "description": "Learning React's basics",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run build",
+    "build": "webpack -d && cp src/app/index.html dist/app/ && webpack-dev-server --inline --hot --content-base ./src/ --open --host 0.0.0.0",
+    "build:prod": "webpack -d && cp src/app/index.html dist/app/ "
   },
   "repository": {
     "type": "git",
