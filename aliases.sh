@@ -4,6 +4,8 @@
 # - Mount ./.dmounts/home/$USER so that it'll be used by the containerized npm.
 # - Run command with same uid/gid as acting user (host).
 # - Expose port 8080
+#
+# Technique found at https://medium.com/faun/set-current-host-user-for-docker-container-4e521cef9ffc
 alias _dnoderun='mkdir -p $(pwd)/.dmounts/home/$USER && \
   docker run -it \
   --workdir="/$(basename $(pwd))" \
