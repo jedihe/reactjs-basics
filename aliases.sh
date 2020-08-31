@@ -1,15 +1,14 @@
-# Ensure .npm/ is owned by acting user before mounting it into the container
-mkdir -p $(pwd)/.npm
-
 # Define basic alias, with support for:
+# - Ensure .dmounts subdir to mount as /home/$USER is owned by the acting user.
 # - Mounting cur-dir as /cur-dir, set it as workdir.
-# - Mount ./.npm so that it'll be used by npm (inside the container).
+# - Mount ./.dmounts/home/$USER so that it'll be used by the containerized npm.
 # - Run command with same uid/gid as acting user (host).
 # - Expose port 8080
-alias _dnoderun='docker run -it \
+alias _dnoderun='mkdir -p $(pwd)/.dmounts/home/$USER && \
+  docker run -it \
   --workdir="/$(basename $(pwd))" \
   --volume="$(pwd):/$(basename $(pwd))" \
-  --volume="$(pwd)/.npm:/home/$USER/.npm" \
+  --volume="$(pwd)/.dmounts/home/$USER:/home/$USER" \
   --user $(id -u):$(id -g) \
   --volume="/etc/group:/etc/group:ro" \
   --volume="/etc/passwd:/etc/passwd:ro" \
