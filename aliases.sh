@@ -7,7 +7,7 @@
 #
 # Technique found at https://medium.com/faun/set-current-host-user-for-docker-container-4e521cef9ffc
 alias _dnoderun='mkdir -p $(pwd)/.dmounts/home/$USER && \
-  docker run -it \
+  docker run -it --rm \
   --workdir="/$(basename $(pwd))" \
   --volume="$(pwd):/$(basename $(pwd))" \
   --volume="$(pwd)/.dmounts/home/$USER:/home/$USER" \
